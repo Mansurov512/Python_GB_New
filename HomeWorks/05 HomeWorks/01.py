@@ -12,6 +12,8 @@
 # Нужно вводить координаты удара.
 # После ввода удара, поле должно переотрисовываться с учётом попадания.
 
+import random
+
 field = []
 fieldsize = 3
 empty_line0 = ["■ "] * fieldsize# я хотел в начале использовать лишь один список и им заполнять все строки игрового поля,
@@ -36,18 +38,17 @@ def print_field(): #распечатка поля в консоль с нуме�
 
 print_field()
 
-import random
-x_coordinate_ship = random.randint(0, fieldsize) + 1# координаты корабля компьютера
-y_coordinate_ship = random.randint(0, fieldsize) + 1
+x_coordinate_ship = int(random.randint(1, fieldsize)) # координаты корабля компьютера
+y_coordinate_ship = int(random.randint(1, fieldsize))
 
-x_coordinate_strike = 0
-y_coordinate_strike = 0
+x_coordinate_strike = int(0)
+y_coordinate_strike = int(0)
 
-while x_coordinate_ship != x_coordinate_strike and y_coordinate_ship != y_coordinate_strike: # цикл самой игры
+while not (x_coordinate_ship == x_coordinate_strike and y_coordinate_ship == y_coordinate_strike): # цикл самой игры
     x_coordinate_strike = int(input(f"Введите координату по ширине поля(строку) от 1 до {fieldsize} включительно: "))# координаты удара
     y_coordinate_strike = int(input(f"Введите координату по высоте поля(столбец) от 1 до {fieldsize} включительно: "))
 
-    if x_coordinate_ship != x_coordinate_strike and y_coordinate_ship != y_coordinate_strike:
+    if x_coordinate_ship != x_coordinate_strike or y_coordinate_ship != y_coordinate_strike:
         field[x_coordinate_strike - 1][y_coordinate_strike - 1] = "O "
         print_field()
         print("Мимо!")
